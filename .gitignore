@@ -1,0 +1,33 @@
+# Secrets
+.env
+
+# Virtual Environment
+fraud_env/
+venv/
+env/
+*.venv
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Data & Models (Keep large binaries out of Git)
+data/
+*.csv
+*.json
+*.joblib
+*.pkl
+*.bst
+
+# Django Specific
+db.sqlite3
+/static/
+/media/
+*.log
+local_settings.py
+
+# IDE & OS Files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
