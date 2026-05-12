@@ -1,0 +1,6 @@
+fraud_env/
+venv/
+data/raw/
+__pycache__/
+.git/
+.env

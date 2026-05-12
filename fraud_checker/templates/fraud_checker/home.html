@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web3 Fraud Guard | AI Security</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    
+    <style>
+        :root {
+            --gold-primary: #D4AF37;
+            --gold-hover: #F9E272;
+            --dark-bg: #0a0a0a;
+            --card-bg: #161616;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .gold-text { color: var(--gold-primary); }
+        
+        .form-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .form-control {
+            background-color: #222;
+            border: 1px solid #333;
+            color: white;
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        .form-control:focus {
+            background-color: #222;
+            color: white;
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-gold {
+            background-color: var(--gold-primary);
+            color: #000;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 14px;
+            border-radius: 10px;
+            border: none;
+            transition: 0.3s;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-gold:hover {
+            background-color: var(--gold-hover);
+            transform: translateY(-2px);
+        }
+
+        .result-box {
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            border: 2px solid;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Responsive adjustments for phones */
+        @media (max-width: 576px) {
+            .glass-card { padding: 1.5rem; margin: 10px; }
+            h2 { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-xl-5 col-lg-7 col-md-9 col-sm-12">
+            <div class="glass-card">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold"><span class="gold-text"> WEB3</span> FRAUD GUARD</h2>
+                    
+                </div>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <label class="form-label">Avg. Min Between Tnx</label>
+                        <input type="number" step="any" name="avg_min" class="form-control" placeholder="120.5" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 mb-4">
+                            <label class="form-label">Sent Tnx</label>
+                            <input type="number" name="sent_tnx" class="form-control" placeholder="15" required>
+                        </div>
+                        <div class="col-6 mb-4">
+                            <label class="form-label">Received Tnx</label>
+                            <input type="number" name="received_tnx" class="form-control" placeholder="5" required>
+                        </div>
+                    </div>
+                    <div class="mb-5">
+                        <label class="form-label">Total Ether Sent</label>
+                        <input type="number" step="any" name="total_eth" class="form-control" placeholder="1.25" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-gold">Analyze Network Pattern</button>
+                </form>
+
+                {% if result %}
+                <div class="result-box text-center {% if result == 'Fraud' %}border-danger bg-danger-subtle{% else %}border-success bg-success-subtle{% endif %}">
+                    <h3 class="{% if result == 'Fraud' %}text-danger{% else %}text-success{% endif %}">
+                        {{ result|upper }} DETECTED
+                    </h3>
+                    <!-- Changed 'probability|format_pct' to just 'probability' -->
+                    <p class="mb-0 text-white">AI Confidence: <strong>{{ probability }}</strong></p>
+                </div>
+                {% endif %}
+
+            </div>
+            
+            <p class="text-center mt-4 text-muted x-small" style="font-size: 0.7rem;">
+                Built with MLOps Best Practices • XGBoost v2.0 • Django 5.0
+            </p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
