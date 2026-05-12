@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Web3 Fraud Guard | AI Security</title>
-    <!-- Bootstrap 5 CSS -->
     <link href="https://jsdelivr.net" rel="stylesheet">
-    <!-- Google Fonts -->
     <link href="https://googleapis.com" rel="stylesheet">
     
     <style>
@@ -24,126 +22,137 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 900px; /* Increased from 500px to fill the screen better */
+            padding: 20px;
         }
 
         .glass-card {
             background: var(--card-bg);
             border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-radius: 30px; /* More rounded for a modern look */
+            padding: 4rem; /* Significant padding for "air" */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
         }
 
         .gold-text { color: var(--gold-primary); }
         
         .form-label {
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 1rem; /* Slightly larger text */
             color: #b0b0b0;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
         }
 
         .form-control {
             background-color: #222;
             border: 1px solid #333;
             color: white;
-            border-radius: 10px;
-            padding: 12px;
+            border-radius: 12px;
+            padding: 18px; /* Bigger input boxes */
+            font-size: 1.1rem;
         }
 
         .form-control:focus {
             background-color: #222;
             color: white;
             border-color: var(--gold-primary);
-            box-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
 
         .btn-gold {
             background-color: var(--gold-primary);
             color: #000;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            padding: 14px;
-            border-radius: 10px;
+            padding: 20px; /* Huge, tactile button */
+            border-radius: 15px;
             border: none;
-            transition: 0.3s;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             width: 100%;
-            margin-top: 1rem;
+            margin-top: 2rem;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
         }
 
         .btn-gold:hover {
             background-color: var(--gold-hover);
-            transform: translateY(-2px);
+            transform: scale(1.02);
         }
 
         .result-box {
-            border-radius: 15px;
-            padding: 1.5rem;
-            margin-top: 2rem;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-top: 3rem;
             border: 2px solid;
-            animation: fadeIn 0.5s ease-in;
+            animation: slideUp 0.6s ease-out;
         }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { 
+            from { opacity: 0; transform: translateY(30px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
 
-        /* Responsive adjustments for phones */
-        @media (max-width: 576px) {
-            .glass-card { padding: 1.5rem; margin: 10px; }
-            h2 { font-size: 1.5rem; }
+        .footer-text {
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            opacity: 0.5;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-xl-5 col-lg-7 col-md-9 col-sm-12">
-            <div class="glass-card">
-                <div class="text-center mb-5">
-                    <h2 class="fw-bold"><span class="gold-text"> WEB3</span> FRAUD GUARD</h2>
-                    
-                </div>
+<div class="main-container">
+    <div class="glass-card">
+        <div class="text-center mb-5">
+            <h1 class="fw-bold display-5 mb-2"><span class="gold-text">🛡️ WEB3</span> FRAUD GUARD</h1>
+            <p class="text-muted lead">Industrial-Grade XGBoost Transaction Analysis</p>
+        </div>
 
-                <form method="POST">
-                    {% csrf_token %}
-                    <div class="mb-4">
-                        <label class="form-label">Avg. Min Between Tnx</label>
-                        <input type="number" step="any" name="avg_min" class="form-control" placeholder="120.5" required>
-                    </div>
-                    <div class="row">
-                        <div class="col-6 mb-4">
-                            <label class="form-label">Sent Tnx</label>
-                            <input type="number" name="sent_tnx" class="form-control" placeholder="15" required>
-                        </div>
-                        <div class="col-6 mb-4">
-                            <label class="form-label">Received Tnx</label>
-                            <input type="number" name="received_tnx" class="form-control" placeholder="5" required>
-                        </div>
-                    </div>
-                    <div class="mb-5">
-                        <label class="form-label">Total Ether Sent</label>
-                        <input type="number" step="any" name="total_eth" class="form-control" placeholder="1.25" required>
-                    </div>
-
-                    <button type="submit" class="btn btn-gold">Analyze Network Pattern</button>
-                </form>
-
-                {% if result %}
-                <div class="result-box text-center {% if result == 'Fraud' %}border-danger bg-danger-subtle{% else %}border-success bg-success-subtle{% endif %}">
-                    <h3 class="{% if result == 'Fraud' %}text-danger{% else %}text-success{% endif %}">
-                        {{ result|upper }} DETECTED
-                    </h3>
-                    <!-- Changed 'probability|format_pct' to just 'probability' -->
-                    <p class="mb-0 text-white">AI Confidence: <strong>{{ probability }}</strong></p>
-                </div>
-                {% endif %}
-
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label class="form-label">Average Minutes Between Transactions</label>
+                <input type="number" step="any" name="avg_min" class="form-control" placeholder="120.5" required>
             </div>
             
-            <p class="text-center mt-4 text-muted x-small" style="font-size: 0.7rem;">
-                Built with MLOps Best Practices • XGBoost v2.0 • Django 5.0
-            </p>
+            <div class="row g-4"> <!-- Added gap between row items -->
+                <div class="col-md-6 mb-4">
+                    <label class="form-label">Total Sent Tnx</label>
+                    <input type="number" name="sent_tnx" class="form-control" placeholder="15" required>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <label class="form-label">Total Received Tnx</label>
+                    <input type="number" name="received_tnx" class="form-control" placeholder="5" required>
+                </div>
+            </div>
+
+            <div class="mb-5">
+                <label class="form-label">Cumulative Ether Volume Sent</label>
+                <input type="number" step="any" name="total_eth" class="form-control" placeholder="1.25" required>
+            </div>
+
+            <button type="submit" class="btn btn-gold">Initiate Neural Pattern Scan</button>
+        </form>
+
+        {% if result %}
+        <div class="result-box text-center {% if result == 'Fraud' %}border-danger bg-danger-subtle{% else %}border-success bg-success-subtle{% endif %}">
+            <h2 class="display-6 fw-bold {% if result == 'Fraud' %}text-danger{% else %}text-success{% endif %}">
+                {{ result|upper }} DETECTED
+            </h2>
+            <p class="mb-0 text-white lead">Model Confidence: <strong>{{ probability }}</strong></p>
+        </div>
+        {% endif %}
+        
+        <div class="text-center mt-5 footer-text">
+            Built with MLOps Pipeline Logic • XGBoost v2.0 • Django 5.1
         </div>
     </div>
 </div>
