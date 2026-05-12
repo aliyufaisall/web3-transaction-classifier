@@ -1,4 +1,5 @@
 SCALABLE WEB3 FRAUD GUARD USING XGBoost
+https://web3-transaction-classifier.onrender.com/
 
 An end-to-end Web3 security system designed to detect fraudulent Ethereum transactions using XGBoost. This project solves the 'Cold Start' and data imbalance challenges inherent in blockchain security by merging live Etherscan API ingestion with historical research datasets. The pipeline is engineered for production, featuring a containerized Django interface and a modular architecture that prioritizes Recall (fraud capture) through dynamic class weighting, ensuring high-risk patterns are identified in real-time without compromising the user experience for legitimate wallets.
 
@@ -79,5 +80,8 @@ docker build -t web3-fraud-guard .
 
 # Run the container
 docker run -p 8000:8000 web3-fraud-guard
+
+<img width="1111" height="945" alt="Screenshot 2026-05-12 154718" src="https://github.com/user-attachments/assets/e9a7da12-91c6-40f5-aeee-fb579f082497" />
+
 
 
